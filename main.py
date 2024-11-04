@@ -40,9 +40,9 @@ class MutiHeadAttention(nn.Module):
         self.d_k = d_k
         self.d_v = d_v
         if d_k == d_v:
-            self.project_qkv = nn.Linear(in_features=d_model, out_features=3 * d_model)
+            self.project_qkv = nn.Linear(in_features=d_model, out_features=3 * d_model, bias=False)
         self.softmax = nn.Softmax()
-        self.project_out = nn.Linear(in_features=d_model, out_features=d_model)
+        self.project_out = nn.Linear(in_features=d_model, out_features=d_model, bias=False)
 
     def forward(self, input_x):
         qkv = self.project_qkv(input_x)  # the size of input_x is (batch, seq_len, d_model)
@@ -129,5 +129,8 @@ if __name__ == "__main__":
     ])
 
     transformer = Transformer()
+    print("########################网络结构########################")
+    print(transformer)
+    print("######################################################")
     res = transformer(input_seq)
     print(f"输出大小：{res.shape}")
