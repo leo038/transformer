@@ -106,9 +106,9 @@ class CrossMutiHeadAttention(nn.Module):
 
         attention_out = None
 
-        q = self.project_q(encoder_output)
+        q = self.project_q(pre_output)
         k = self.project_k(encoder_output)
-        v = self.project_v(pre_output)
+        v = self.project_v(encoder_output)
         for n_h in range(self.num_head):
             Q = q[:, :, n_h * self.d_k: (n_h + 1) * self.d_k]
             K = k[:, :, n_h * self.d_k: (n_h + 1) * self.d_k]
