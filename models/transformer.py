@@ -236,8 +236,11 @@ if __name__ == "__main__":
     ])
 
     transformer = Transformer()
+
+    params_num = sum(p.numel() for p in transformer.parameters())
     print("########################网络结构########################")
     print(transformer)
+    print(f"模型参数量： {params_num/1e6} M")
     print("######################################################")
     res = transformer(input_seq, pre_output)
     print(f"输出大小：{res.shape}")
